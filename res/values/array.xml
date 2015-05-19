@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="recognizers">
+        <item >Tesseract</item>
+        <item >ANN</item>
+        <item>Multinet</item>
+ 
+    </string-array>
+    
+</resources>

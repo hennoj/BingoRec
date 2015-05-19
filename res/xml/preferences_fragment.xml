@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+   
+    
+    
+    <ListPreference
+                android:key="recognizer"
+                android:title="Recognizer Module"
+                android:entries="@array/recognizers"
+                android:entryValues="@array/recognizers"
+     android:defaultValue="Tesseract"/>
+    
+    
+    
+
+    
+
+</PreferenceScreen>
+
