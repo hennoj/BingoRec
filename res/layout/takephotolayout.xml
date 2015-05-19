@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    >
+
+    <SurfaceView
+    android:id="@+id/the_real_preview"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+  />
+    
+    <com.example.bingorec.MySurfaceView
+    android:id="@+id/the_modified_preview"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+  />
+    
+    
+   <ImageView
+        android:id="@+id/helper_parsed_image"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        
+      />
+    
+    
+
+    
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+         >
+         <Button
+        android:id="@+id/captureFront"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        
+        android:text="Capture" />
+    
+    <Button
+        android:id="@+id/do_recognize_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recognize" />
+    
+    <Button
+        android:id="@+id/take_new_picture_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New" />
+    </LinearLayout>
+
+</RelativeLayout> 
