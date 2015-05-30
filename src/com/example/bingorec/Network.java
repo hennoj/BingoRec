@@ -76,6 +76,7 @@ public class Network implements java.io.Serializable
     {
         for (Instance inst:data)
         {
+        	// System.out.println("inst attributes size: " + inst.attributes.size());
             train(inst);
         }
     }
@@ -141,9 +142,9 @@ public class Network implements java.io.Serializable
         return SqErrSum;
     }
     
-    public double evaluateAccuracy(Vector<Instance> data)
+    public int evaluateCorrect(Vector<Instance> data)
     {
-        int correct = 0;
+    	int correct = 0;
         
         for (Instance inst:data)
         {
@@ -157,6 +158,16 @@ public class Network implements java.io.Serializable
             }
             if (ok) correct++;
         }
+        
+        return correct;
+        
+        
+    }
+    
+    public double evaluateAccuracy(Vector<Instance> data)
+    {
+        int correct = evaluateCorrect(data);
+        
         
         double percent = (double)correct / (double)data.size() * 100.0;
         

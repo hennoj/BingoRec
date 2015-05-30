@@ -1,7 +1,6 @@
 package com.example.bingorec;
 
 
-import java.util.Vector;
 
 /**
  *

@@ -21,9 +21,9 @@ public class MultiNetwork
 		this.dir = dir;
 	}
 	
-	public void trainNetworks(Vector<Instance> singleTrainData)
+	public Vector < Vector <Instance> > singleToMultiData(Vector<Instance> singleTrainData)
 	{
-		multiTrainData = new Vector< Vector <Instance > >();
+		Vector< Vector<Instance >> multiData = new Vector< Vector <Instance > >();
 		for(int i=0;i<numNetworks;i++)
 		{
 			Vector <Instance> numData = new Vector<Instance>();
@@ -40,16 +40,89 @@ public class MultiNetwork
 				Instance numInstance = Instance.createMultiInstance(isNumber, inst.toString());
 				numData.add(numInstance);
 			}
-			multiTrainData.add(numData);
+			multiData.add(numData);
 		}
+		return multiData;
+	}
+	
+	public int [] evaluateTotalAccuracy(Vector<Instance> singleData)
+	{
+		Vector< Vector <Instance > > multiEvaluateData = singleToMultiData(singleData);
+		double [] accuracy = new double[nets.size()];
+		int correct = 0;
+		int total = 0;
+		for(int i=0;i<nets.size();i++)
+		{
+			Network net = nets.get(i);
+			Vector<Instance> data = multiEvaluateData.get(i);
+			total += data.size();
+			correct += net.evaluateCorrect(data);
+		}
+		int [] res = new int[2];
+		res[0] = correct;
+		res[1] = total;
+		return res;
+		
+		
+	}
+	
+	public double [] evaluateTrainAccuracy()
+	{
+		double [] accuracy = new double[nets.size()];
+		for(int i=0;i<nets.size();i++)
+		{
+			Network net = nets.get(i);
+			Vector<Instance> data = multiTrainData.get(i);
+			accuracy[i] = net.evaluateAccuracy(data);
+		}
+		return accuracy;
+	}
+	
+	public int [] evaluateTotalTrainAccuracy()
+	{
+		double [] accuracy = new double[nets.size()];
+		int correct = 0;
+		int total = 0;
+		for(int i=0;i<nets.size();i++)
+		{
+			Network net = nets.get(i);
+			Vector<Instance> data = multiTrainData.get(i);
+			total += data.size();
+			correct += net.evaluateCorrect(data);
+		}
+		int [] res = new int[2];
+		res[0] = correct;
+		res[1] = total;
+		return res;
+	}
+	
+	public double [] evaluateAccuracy(Vector<Instance> singleData)
+	{
+		
+		Vector< Vector <Instance > > multiEvaluateData = singleToMultiData(singleData);
+		double [] accuracy = new double[nets.size()];
+		for(int i=0;i<nets.size();i++)
+		{
+			Network net = nets.get(i);
+			Vector<Instance> data = multiEvaluateData.get(i);
+			accuracy[i] = net.evaluateAccuracy(data);
+		}
+		return accuracy;
+	}
+	
+	public void trainNetworks(Vector<Instance> singleTrainData)
+	{
+		
+		multiTrainData = singleToMultiData(singleTrainData);
+		
 		
 		
 		newNetworks();
 		
 		double [] accuracy = new double[nets.size()];
-	    double targetAccuracy = 98.0;
+	    double targetAccuracy = 99.0;
 	    int iterations = 1;
-	    
+	   
         while (minimum(accuracy) < targetAccuracy)
         {
         	for(int i=0;i<nets.size();i++)
@@ -73,7 +146,7 @@ public class MultiNetwork
             System.out.println();
             iterations++;
             
-            if (iterations > 10000)
+            if (iterations > 1000)
             {
             	System.out.println("Out of iterations");
             	break;
@@ -116,7 +189,7 @@ public class MultiNetwork
 	{
 		for(int i=0;i<numNetworks;i++)
 		{
-			Network n = new Network(324, 10, 1);
+			Network n = new Network(324, 11, 1);
 	        nets.add(n);
 		}
 	}

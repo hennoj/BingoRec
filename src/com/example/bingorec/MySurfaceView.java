@@ -4,6 +4,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
 
+import com.example.bingorec.TakePhotoAndEdit.Focus;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -46,6 +48,8 @@ private boolean isPreviewRunning = false;
 private int mMultiplyColor;
 
 private ImageParser parser;
+
+
 
 public Camera getCamera() { return mCamera; }
 
@@ -107,6 +111,7 @@ public void surfaceCreated(SurfaceHolder holder) {
 
 
         mCamera = Camera.open(findFrontFacingCamera());
+        
         isPreviewRunning = true;
         Camera.Parameters p = mCamera.getParameters();
         
@@ -123,6 +128,8 @@ public void surfaceCreated(SurfaceHolder holder) {
         mCamera.setParameters(p);
 
         rgbints = new int[width * height];
+        
+        
 
         try { mCamera.setPreviewDisplay(realHolder); } catch (IOException e)
         { Log.e("Camera", "mCamera.setPreviewDisplay(holder);"); }

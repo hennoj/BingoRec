@@ -74,6 +74,7 @@ public class TakePhotoAndEdit extends Activity
     	
     	the_modified_preview.setPreviewDisplay(the_real_preview.getHolder());
     	
+    	
 	    
 	    
 	    View decorView = getWindow().getDecorView();
@@ -104,9 +105,10 @@ public class TakePhotoAndEdit extends Activity
 
     		if(v == takeImageButton)
     		{
-    			the_modified_preview.getCamera().autoFocus(new Focus());
-    			the_modified_preview.getCamera().takePicture(null, null,
-    		    		new PhotoHandler(getApplicationContext()) );
+    			 the_modified_preview.getCamera().autoFocus(new Focus());
+    			// the_modified_preview.getCamera().takePicture(null, null,
+    		    	//	 new PhotoHandler(getApplicationContext()) );
+    			
     		}
     		else if(v == doRecognizeButton)
     		{
@@ -124,9 +126,7 @@ public class TakePhotoAndEdit extends Activity
     		}
     		else if(v == newPictureButton)
     		{
-    			helperImage.setVisibility(View.INVISIBLE);
-    			the_modified_preview.getCamera().startPreview();
-    			
+    			recreate();
     		}
     		
     		
@@ -335,7 +335,7 @@ public class TakePhotoAndEdit extends Activity
 	
 	
 	
-	private class Focus implements Camera.AutoFocusCallback
+	public class Focus implements Camera.AutoFocusCallback
 	{
 		public void onAutoFocus(boolean success, Camera camera)
 		{
@@ -359,6 +359,8 @@ public class TakePhotoAndEdit extends Activity
 		  public void onPictureTaken(byte[] data, Camera camera) 
 		  {
 
+			  Toast.makeText(context, "Picture taken!",
+			          Toast.LENGTH_LONG).show();
 		    File pictureFileDir = new File(getImageFileDir());
 
 		    if (!pictureFileDir.exists() && !pictureFileDir.mkdirs())
